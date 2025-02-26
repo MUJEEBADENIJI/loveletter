@@ -5,7 +5,7 @@ function toggleCard() {
 
     cardWrapper.classList.toggle("open");
 
-    // Play audio when the card is opened
+    // Play audio when the card is opened ......
     if (cardWrapper.classList.contains("open")) {
         audio.play();
     } else {
