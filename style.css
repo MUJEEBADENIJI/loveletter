@@ -1,0 +1,186 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    background-color: pink;
+    font-family: Arial, sans-serif;
+}
+
+.card-wrapper {
+    position: relative;
+}
+
+.card {
+    width: 650px;
+    height: 100vh;
+    margin-top: 300px;
+    background-color: red;
+    color: white;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: absolute; /* Position cards on top of each other */
+    transform-style: preserve-3d;
+    transition: transform 1s ease;
+    z-index: 1;
+}
+
+.front,
+.inside {
+    position: absolute;
+    backface-visibility: hidden;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.front {
+    background-color: red;
+}
+
+.inside {
+    background-color: #ff4081;
+    color: white;
+    transform: rotateY(180deg);
+}
+
+/* Flipping animation */
+.card.open {
+    transform: rotateY(-180deg);
+    z-index: 0; /* Keep flipped card above the second card */
+}
+
+/* Second card (hidden initially, beneath the first card) */
+.second-card {
+    opacity: 0;
+    visibility: hidden;
+    transform: rotateY(180deg);
+    transition: opacity 1s ease, visibility 1s ease;
+    z-index: 0; /* Second card stays beneath the first one */
+}
+
+/* Once the first card opens, show the second card */
+.card.open + .second-card {
+    opacity: 1;
+    visibility: visible;
+    transform: rotateY(0deg);
+}
+
+/* Letter container with scroll effect */
+.letter-container {
+    background-color: white;
+    padding: 20px;
+    width: 90%;
+    height: 550px;
+    
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;  /* Enables vertical scrolling */
+    scrollbar-width: thin; /* For Firefox */
+    scrollbar-color: #e63946 white;
+}
+
+/* Customize scrollbar for Webkit browsers (Chrome, Safari) */
+.letter-container::-webkit-scrollbar {
+    width: 5px;
+}
+
+.letter-container::-webkit-scrollbar-thumb {
+    background: #e63946;
+    border-radius: 5px;
+}
+
+h1{
+    color: #e63946;
+}
+
+p{
+    font-size: 18px;
+    color: #555;
+    letter-spacing: 1px;
+    display: inline-block;
+}
+.signature{
+    margin-top: 20px;
+    color: #e63946;
+    font-family: "Great Vibes" serif;
+}
+
+
+#love-video {
+    width: 100px;  /* Adjust the width */
+    height: auto;  /* Maintain aspect ratio */
+    border-radius: 10px;  /* Optional: rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);  /* Optional: add shadow */
+    margin: 20px auto;  /* Center the video */
+    
+}
+
+/* Show video when needed */
+#love-video.show {
+    display: block;
+}
+
+
+/* Styling for falling roses */
+.rose {
+    position: absolute;
+    top: -50px;
+    color: red;
+    font-size: 24px;
+    animation: fall linear infinite;
+}
+
+/* Keyframe animation for falling effect */
+@keyframes fall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+
+/* Container for falling images (prevents overlap on card) */
+#falling-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 90%;
+    height: 100%;
+    pointer-events: none; /* Makes sure it doesn’t interfere with clicking elements */
+    z-index: -1; /* Sends it behind everything */
+}
+
+/* Falling image styling */
+.falling-image {
+    position: absolute;
+    width: 80px; /* Adjust size */
+    height: auto;
+    opacity: 0.8;
+    animation: fall linear infinite;
+}
+
+/* Falling animation */
+@keyframes fall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
