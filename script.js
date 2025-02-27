@@ -5,18 +5,41 @@ function toggleCard() {
 
     cardWrapper.classList.toggle("open");
 
-    // Play audio when the card is opened ......
     if (cardWrapper.classList.contains("open")) {
-        audio.play();
+        // Play audio if it's paused
+        if (audio.paused) {
+            audio.play().catch(error => console.log("Audio playback error:", error));
+        }
+
+        
+        // Resume all videos and ensure they loop
+        videos.forEach(video => {
+            video.loop = true; // Ensures the video loops when it ends
+            video.play().catch(error => console.log("Video playback error:", error));
+        });
+   
     } else {
-        audio.pause();
-        audio.currentTime = 0; // Reset audio when card closes
-    }
-}
+        // Pause all videos (but DO NOT reset them)
+        videos.forEach(video => {
+            video.pause();
+        });
+
+          // Pause and reset audio
+          audio.pause();
+          audio.currentTime = 0;
+      }
+  }
 document.addEventListener("DOMContentLoaded", function () {
     const audio = document.getElementById("bg-music");
-    const video = document.getElementById("love-video");
+    const videos = document.querySelectorAll("video");
     const card = document.querySelector(".card");
+
+    videos.forEach(video => {
+        video.addEventListener("ended", function () {
+            this.currentTime = 0; // Reset to the beginning
+            this.play().catch(error => console.log("Video replay error:", error));
+        });
+    });
 
     card.addEventListener("click", function () {
         if (audio.paused) {
@@ -24,17 +47,20 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         window.addEventListener("load", () => {
             const videos = document.querySelectorAll("video");
-            videos.forAll(video => {
+            videos.foreach(video => {
               video.play().catch(error => console.log("Autoplay failed:", error));
             });
         });
 
-         // Play the video when the card opens
+         // Play all videos when card opens
          setTimeout(() => {
-            video.classList.remove("hidden");
-            video.play().catch(error => console.log("Video playback error:", error));
-        }, 1000); // Slight delay to match the card opening animation
+            videos.forEach(video => {
+                video.classList.remove("hidden");
+                video.play().catch(error => console.log("Video playback error:", error));
+            });
+        }, 1000); // Delay for animation effect
 
+        
 
     });
 });

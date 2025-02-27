@@ -184,3 +184,28 @@ p{
         opacity: 0;
     }
 }
+/* 📱 Mobile-Specific Styles */
+@media (max-width: 600px) {
+    .card {
+        width: 85vw;
+        height: 65vh;
+    }
+
+    .letter-container {
+        max-height: 45vh;
+        font-size: 14px;
+    }
+
+    #love-video {
+        width: 75vw;
+        max-width: 250px;
+    }
+
+    h1 {
+        font-size: 18px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+}
