@@ -114,6 +114,9 @@ p{
     color: #e63946;
     font-family: "Great Vibes" serif;
 }
+video {
+    pointer-events: none; /* Disables clicks */
+}
 
 
 #love-video {
@@ -188,17 +191,17 @@ p{
 @media (max-width: 600px) {
     .card {
         width: 85vw;
-        height: 65vh;
+        height: 75vh;
     }
 
     .letter-container {
-        max-height: 45vh;
+        max-height: 55vh;
         font-size: 14px;
     }
 
     #love-video {
         width: 75vw;
-        max-width: 250px;
+        max-width: 100px;
     }
 
     h1 {
